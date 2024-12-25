@@ -1,0 +1,5 @@
+bs4
+Flask
+Flask-SocketIO
+requests
+python-dotenv

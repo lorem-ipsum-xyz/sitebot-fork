@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% block jss %}
+<script>
+$('#copy').click(function(){
+  navigator.clipboard.writeText($('textarea').text())
+  $(this).text('Copied')
+  $(this).attr('disabled','')
+  setTimeout(()=>{
+    const copy = $("#copy")
+    copy.text('Copy')
+    copy.removeAttr('disabled')
+  },500)
+})
+$("#raw").click(()=>{
+  window.location.href = `/paster/{{ path }}/raw`
+})
+</script>
+{% endblock %}
+{% block content %}
+<style>
+  body{
+    padding: 5px;
+    background: #eef3f6;
+  }
+  .container{
+    background: #C9E6F0;
+    width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 0 12px #bcc2c6;
+    margin-top: 3em;
+  }
+  .inputs{
+    background: #78B3CE;
+    padding: 10px;
+  }
+  button{
+    padding: 2px 6px;
+    border-radius: 5px;
+    border: 2px solid #5180cf;
+    color: #2a65c9;
+    background: none;
+  }
+  .text{
+    background: none;
+  }
+  textarea{
+    height: 450px;
+    width: 100%;
+    background: #C9E6F0;
+    border: 1px solid #78B3CE;
+    resize: none;
+    padding: 4px;
+    outline: none;
+  }
+  @media(max-width:768px){
+    .container{
+      width: 100%;
+      margin: 0;
+    }
+  }
+</style>
+<div class="container">
+  <div class="inputs">
+    <button id='raw'>Raw</button>
+    <button id="copy">Copy</button>
+  </div>
+  <div class="text">
+    <textarea readonly>{{ text }}</textarea>
+  </div>
+</div>
+{% endblock %}
