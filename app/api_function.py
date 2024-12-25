@@ -78,7 +78,15 @@ def tiktok_downloader(link: str) -> dict:
     }
     data = {"query": link,"languange_id": "1"}
     
-    res = requests.post(url, json=data, headers=headers, timeout=10)
+    res = requests.post(url,
+      json=data,
+      headers=headers,
+      proxies={
+        "http": "92.255.107.53:8080",
+        "https": "92.255.107.53:8080"
+      },
+      timeout=10
+    )
     html = BeautifulSoup(res.content, 'html.parser')
     
     buttons = html.find('div', id='button-download-ready')
